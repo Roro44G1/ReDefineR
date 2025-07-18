@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Infografic: Ghidul Complet al Proteinelor</title>
     
-    <!-- CDN-uri pentru Tailwind CSS, Chart.js și Google Fonts (Inter) -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,14 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* Culori din paleta "Energetic & Playful":
-           Dark Blue: #073B4C
-           Medium Blue: #118AB2
-           Green: #06D6A0
-           Yellow: #FFD166
-           Red: #FF6B6B
-           Slate: #64748b
-        */
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f1f5f9; /* bg-slate-100 */
@@ -42,26 +33,15 @@
     </style>
 </head>
 <body>
-
-    <!-- NEITHER Mermaid JS NOR SVG were used anywhere in the output. -->
-    <!-- Paleta de culori aleasă: Energetic & Playful -->
-    <!-- Planul narațiunii și structurii: Infograficul prezintă informații esențiale despre proteine, structurate într-o manieră vizuală și ușor de digerat. Secțiunile includ: Introducere și statistică rapidă, Rolurile proteinelor, Comparația surselor animale vs. vegetale, Completitudinea proteinelor vegetale, Necesarul zilnic, Efectele deficitului și excesului, Top surse vegetale și Rolul suplimentelor proteice. -->
-    <!-- Vizualizări alese și justificări (NO SVG):
-        - ~16% statistică: Goal Inform -> Single Big Number -> Utilizat text mare și bold pentru impact direct.
-        - Rolurile proteinelor: Goal Organize -> List/Table (HTML/CSS) -> Utilizat grid HTML și iconițe Unicode pentru a enumera clar rolurile.
-        - Surse de Proteine: Comparație (ProteinCompareChart): Goal Compare -> Bar Chart (Chart.js) -> Ideal pentru compararea cantităților de proteine între diferite surse.
-        - Completitudine Proteine Vegetale (CompletenessDonut): Goal Compare -> Donut Chart (Chart.js) -> Arată proporția de surse vegetale complete vs. incomplete într-un mod simplu și vizual.
-        - Necesarul Proteic Zilnic: Goal Inform -> Single Big Number / List (HTML/CSS) -> Prezentat ca text mare pentru a evidenția două valori cheie, susținut de un layout simplu.
-        - Extremele: Deficit vs. Exces de Proteine: Goal Organize / Compare -> List/Table (HTML/CSS) -> Listă cu iconițe Unicode pentru a contrasta clar efectele negative ale deficitului și excesului.
-        - Top Surse Proteice Vegetale (TopVeggieChart): Goal Organize / Compare -> Ordered Bar Chart (Chart.js) -> Prezintă sursele vegetale în ordine descrescătoare a conținutului de proteine, facilitând clasamentul vizual.
-        - Suplimentele Proteice: Un Ajutor Modern: Goal Inform -> List/Table (HTML/CSS) -> Listă cu bullet points și o secțiune stilizată pentru a evidenția beneficiile și importanța siguranței (Lista de la Köln).
-    -->
-
+    
     <main class="container mx-auto p-4 md:p-8 max-w-7xl">
 
         <header class="text-center mb-12">
             <h1 class="text-4xl md:text-5xl font-bold text-[#073B4C] mb-4">Ghidul complet al proteinelor</h1>
             <p class="text-lg text-slate-600 max-w-3xl mx-auto">Proteinele sunt "blocurile de construcție" esențiale ale corpului. Descoperă de ce sunt cruciale, de unde le obții și cum să le integrezi corect în dieta ta.</p>
+            <nav class="mt-8">
+                <a href="index.html" class="inline-block bg-[#118AB2] text-white px-6 py-2 rounded-lg font-semibold hover:bg-[#073B4C] transition duration-300 shadow-md">← Înapoi la Meniu</a>
+            </nav>
         </header>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -126,6 +106,7 @@
                         <p class="text-3xl font-bold text-[#06D6A0]">0.8 g / kg corp</p>
                     </div>
                     <div class="bg-slate-50 p-4 rounded-lg text-center">
+                        <p class="font-semibold text-slate-600">Sportiv / Persoană Activă</p>
                         <p class="text-3xl font-bold text-[#FF6B6B]">1.2 - 2.2 g / kg corp</p>
                     </div>
                 </div>
@@ -235,7 +216,7 @@
             const lines = [];
             let currentLine = '';
             words.forEach(word => {
-                if ((currentLine + ' ' + word).length > maxLength && currentLine !== '') {
+                if ((currentLine + ' ' + word).length > maxLength) {
                     lines.push(currentLine.trim());
                     currentLine = word;
                 } else {
@@ -324,7 +305,7 @@
                 type: 'bar',
                 data: data,
                 options: { ...tooltipConfig,
-                    indexAxis: 'y', // Grafic pe orizontală
+                    indexAxis: 'y',
                     responsive: true,
                     maintainAspectRatio: false,
                     scales: {
@@ -337,15 +318,10 @@
             });
         }
         
-        window.addEventListener('load', () => { // Folosim window.load pentru a ne asigura că toate resursele externe sunt încărcate
-            console.log("Window loaded. Chart.js type:", typeof Chart); // Log pentru verificare
-            if (typeof Chart !== 'undefined') {
-                initProteinCompareChart();
-                initCompletenessDonut();
-                initTopVeggieChart();
-            } else {
-                console.error("Chart.js nu este definit. Graficele nu pot fi generate.");
-            }
+        window.addEventListener('load', () => {
+            initProteinCompareChart();
+            initCompletenessDonut();
+            initTopVeggieChart();
         });
     </script>
 </body>
